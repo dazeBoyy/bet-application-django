@@ -1,0 +1,43 @@
+
+/*
+ * Custom translucent site header
+ */
+
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+.product-device {
+  position: absolute;
+  right: 10%;
+  bottom: 12%;
+  width: 300px;
+  height: 440px;
+  background-color: #333;
+  border-radius: 21px;
+  transform: rotate(30deg);
+}
+
+.product-device::before {
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  bottom: 10%;
+  left: 10px;
+  content: "";
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 5px;
+}
+
+.product-device-2 {
+  right: auto;
+  bottom: 12%;
+  left: 5%;
+  background-color: #333;
+  border-radius: 21px;
+  transform: rotate(30deg);
+}
+
+
+
+

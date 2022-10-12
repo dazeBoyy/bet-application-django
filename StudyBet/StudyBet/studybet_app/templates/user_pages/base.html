@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+   <link href="{% static 'css/product.css' %}" rel="stylesheet">
+    <title>StudyBet</title>
+</head>
+
+<html>
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
+<header class="bg-dark">
+  <div class="container bg-dark">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="col-4 pt-1">
+              <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" href="http://127.0.0.1:8000"><h1 class="text-danger">Study</h1> <h1 class="text-warning">Bet</h1></a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+               {% if user.is_authenticated %}
+                <div class="col-3 text-center">
+              <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                   <li>
+                    <a class="nav-link text-white px-2" href="{% url 'account_bets' request.user.account.id %}">Ваши ставки</a>
+                  </li>
+                </ul>
+            </div>
+              <div class="col-4 d-flex">
+               <p class="align-items-center justify-content-center mb-md-0 text-white text-decoration-none" >Баланс: {{request.user.account.cash}} руб.</p>
+               </div>
+        <div class="col-4 d-flex justify-content-end align-items-center mb-2 ">
+            <button type="button" class="btn btn-sm btn-outline-secondary mr-3 "> <a class="nav-link text-white text-decoration-none" href="{% url 'get_balance' request.user.account.id %}">Пополнить баланс</a></button>
+          <button type="button" class="btn btn-sm btn-outline-secondary mr-3 "> <a class="nav-link text-white text-decoration-none" href="#">Hi, {{user.username}}</a></button>
+          <button type="button" class="btn btn-sm btn-outline-secondary bg-warning"><a class="nav-link text-dark text-decoration-none" href="{% url 'logout_user' %}">Выйти из аккаунта</a></button>
+            {% else %}
+          <button type="button" class="btn btn-sm btn-outline-secondary mr-3"><a class="nav-link text-white text-decoration-none" href="http://127.0.0.1:8000/register">Регистрация</a></button>
+          <button type="button" class="btn btn-sm btn-outline-secondary bg-warning"><a class="text-dark nav-link text-white text-decoration-none" href="http://127.0.0.1:8000">Вход</a></button>
+            {% endif %}
+        </div>
+      </nav>
+    </div>
+</header>
+
+    </div>
+
+
+
+
+
+{% block content %}
+
+      {% endblock %}

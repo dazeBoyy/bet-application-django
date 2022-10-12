@@ -1,0 +1,52 @@
+{% extends 'user_pages/base.html' %}
+{% block content %}
+
+{% if bets %}
+  {% for bet in bets %}
+  <div class="row justify-content-center m-4">
+                    <div class="text-center bg-dark rounded-3 d-flex flex-column">
+                         <h1 class="text-white">Сумма вашей ставки</h1>
+                           <p class="text-white">{{bet.bet_amount}}</p>
+                               <h1 class="text-white">Ваша ставка</h1>
+                            {% if bet.bet == 0 %}
+                                <p class="text-white">Проигрыш!</p>
+                              {% elif bet.bet == 1 %}
+                                <p class="text-white">Победа!</p>
+                                {% else %}
+                                <p class="text-white">В процессе!</p>
+                             {% endif %}
+                        <h1 class="text-white">Ваш коэффициент</h1>
+                           <p class="text-white">{{bet.bet_course}}</p>
+
+                         <p class="text-white">Итог события:</p>
+                             {% if bet.fixture.fixture_result == 0 %}
+                                <p class="text-white">Проигрыш!</p>
+                              {% elif bet.fixture.fixture_result == 1 %}
+                                <p class="text-white">Победа!</p>
+                                {% else %}
+                                <p class="text-white">В процессе!</p>
+                             {% endif %}
+                        <h1 class="text-white">Итог ставки: </h1>
+                         {% if bet.fixture.fixture_result == bet.bet %}
+                               <h1 class="text-white">Вы выйграли!</h1>
+                                 <p class="text-white">Сумма выйгрыша: {% widthratio bet.bet_amount 1 bet.bet_course %}</p>
+                         {% elif bet.fixture.fixture_result == 2 %}
+                            <h1 class="text-white">Результат не известен</h1>
+                          {% else %}
+                                <p class="text-white">Вы проиграли</p>
+                             {% endif %}
+                        </div>
+                    </div>
+                  </div>
+</div>
+
+{% endfor %}
+{% else %}
+<h1 class="text-center">На данный момент событий нет!</h1>
+{% endif %}
+<footer class="footer position-bottom container border-top">
+       <div class="copyright text-center my-auto">
+         <p>© 2022 Ставки в букмекерской компании «StudyBet»</p>
+       </div>
+</footer>
+{% endblock %}

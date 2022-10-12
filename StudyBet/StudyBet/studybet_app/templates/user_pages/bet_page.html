@@ -1,0 +1,98 @@
+{% extends 'user_pages/base.html' %}
+{% block content %}
+
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light border-bottom">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 fw-normal">Лучший букмекер StudyBet</h1>
+      <p class="lead fw-normal" >Букмекерская контора StudyBet предлагает сделать ставки на любые события.Мы – легальная компания по ставкам через интернет с высокими коэффициентами и быстрыми выплатами в России.</p>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+
+<div class="container">
+          <h1 class="text-center border-bottom">События:</h1>
+        <div class="justify-content-md-center row px-5 border-bottom">
+         <a class="btn btn-success m-4" href="http://127.0.0.1:8000" role="button">Активные</a>
+         <a class="btn btn-warning m-4" href="http://127.0.0.1:8000/bet/finished" role="button">Прошедшие</a>
+        </div>
+    <form action="{% url 'make_bet' request.user.account.id  fixture.id %}" method="post">
+                {% csrf_token %}
+        <div class="container ">
+                  <div class="row justify-content-center m-4">
+                    <div class="text-center bg-dark rounded-3 d-flex flex-column">
+                      <h2 class="text-white">{{ fixture.bet_name }}</h2>
+                          <div class="mx-auto justify-content-md-center ">
+                                <div class="form-check form-check-inline px-5">
+                                    <input class="form-check-input" type="radio" name="vote" id="listGroupRadioGrid1" value="0" checked="">
+                                    <label class="btn btn-outline-light" for="listGroupRadioGrid1">
+                                      <strong class="fw-semibold">{{fixture.bet_win}}</strong>
+                                    </label>
+                                </div>
+                              <div class="form-check form-check-inline px-5">
+                                <input class="form-check-input" type="radio" name="vote" id="listGroupRadioGrid2" value="1">
+                                <label class="btn btn-outline-light" for="listGroupRadioGrid2">
+                                  <strong class="fw-semibold">{{fixture.bet_lose}}</strong>
+                                </label>
+                              </div>
+                            </div>
+                          <h2 class="text-white">Ваша ставка:</h2>
+                           <div class="mx-auto justify-content-md-center ">
+                                <div class="form-check form-check-inline px-5">
+                                    <input class="form-check-input" type="radio" name="bet" id="listGroupRadioGrid3" value="500" checked="">
+                                    <label class="btn btn-outline-light" for="listGroupRadioGrid3">
+                                      <strong class="fw-semibold">500</strong>
+                                    </label>
+                                </div>
+                              <div class="form-check form-check-inline px-5">
+                                <input class="form-check-input" type="radio" name="bet" id="listGroupRadioGrid4" value="1000">
+                                <label class="btn btn-outline-light" for="listGroupRadioGrid4">
+                                  <strong class="fw-semibold">1000</strong>
+                                </label>
+                              </div>
+                               <div class="form-check form-check-inline px-5">
+                                <input class="form-check-input" type="radio" name="bet" id="listGroupRadioGrid5" value="1500">
+                                <label class="btn btn-outline-light" for="listGroupRadioGrid5">
+                                  <strong class="fw-semibold">1500</strong>
+                                </label>
+                              </div>
+                            </div>
+                         <h2 class="text-white">Коэффициент:</h2>
+                         <div class="mx-auto justify-content-md-center ">
+                                <div class="form-check form-check-inline px-5">
+                                    <input class="form-check-input" type="radio" name="course" id="listGroupRadioGrid6" value="2" checked="">
+                                    <label class="btn btn-outline-light" for="listGroupRadioGrid6">
+                                      <strong class="fw-semibold">x2</strong>
+                                    </label>
+                                </div>
+                              <div class="form-check form-check-inline px-5">
+                                <input class="form-check-input" type="radio" name="course" id="listGroupRadioGrid7" value="4">
+                                <label class="btn btn-outline-light" for="listGroupRadioGrid7">
+                                  <strong class="fw-semibold">x4</strong>
+                                </label>
+                              </div>
+                            </div>
+                         <p class="text-white">Итог события:</p>
+                             {% if fixture.fixture_result == 0 %}
+                                <p class="text-white">Проигрыш!</p>
+                              {% elif fixture.fixture_result == 1 %}
+                                <p class="text-white">Победа!</p>
+                                {% else %}
+                                <p class="text-white">В процессе!</p>
+                             {% endif %}
+                          <input class="btn btn-danger btn-lg btn-block" type="submit" value="Сделать ставку">
+                        </div>
+                    </div>
+                  </div>
+    </form>
+</div>
+
+
+<footer class="footer position-bottom container border-top">
+       <div class="copyright text-center my-auto">
+         <p>© 2022 Ставки в букмекерской компании «StudyBet»</p>
+       </div>
+</footer>
+
+{% endblock %}
